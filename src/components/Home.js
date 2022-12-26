@@ -8,29 +8,22 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    // Define an array of image URLs
     const imageURLs = [
       Slide1,
       Slide2,
       Slide3,
     ];
 
-    // Set the initial background image
     this.setState({ backgroundImage: imageURLs[0] });
-
-    // Set a timer to change the background image every 5 seconds
     this.interval = setInterval(() => {
-      // Get the current index of the background image
+
       const currentIndex = imageURLs.indexOf(this.state.backgroundImage);
 
-      // Set the next background image
-      // If the current index is the last element in the array, start over at the beginning
-      this.setState({ backgroundImage: imageURLs[currentIndex + 1] || imageURLs[0] });
+    this.setState({ backgroundImage: imageURLs[currentIndex + 1] || imageURLs[0] });
     }, 25000);
   }
 
   componentWillUnmount() {
-    // Clear the timer when the component unmounts
     clearInterval(this.interval);
   }
   render() {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo1 from '../assets/images/logo-1.png'
 export default class Nav extends Component {
-  
+
     state = {
         checkTogget: true,
         listNav: [
@@ -15,34 +15,59 @@ export default class Nav extends Component {
             { idNav: "7", titleNav: "contact" },
         ],
         width: 0,
-        height: 0
+        height: 0,
+        activeNav: "home",
     }
     clickMenu = () => {
         this.setState({
             checkTogget: !this.state.checkTogget
         })
     }
+    handleScroll = () => {
+        const titleNavArray = this.state.listNav.map(item => item.titleNav);
+        // console.log(titleNavArray)
+        titleNavArray.forEach(item => {
+            const section = document.getElementById(item);
+            if (section) {
+                if (window.scrollY >= section.offsetTop - 20
+                    && window.scrollY <
+                    (section.offsetTop + section.offsetHeight - 20)) {
+                    this.setState({ activeNav: item });
+                    //  console.log(this.state.activeNav)
+                }
+            }
+        })
+       // console.log("day la scorll" + this.state.activeNav)
+
+    }
     handleClick = (titleNav) => {
-        // Scroll to the top of the div element with the "target" id
+       
         document.getElementById(titleNav).scrollIntoView({ behavior: 'smooth' });
-     
+        // this.handleScroll()
+        this.setState({
+            activeNav : titleNav
+        })
+    // console.log("day la click " + this.state.activeNav)
     };
     updateDimensions = () => {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
-      };
-      //sau khi render
-      componentDidMount() {
-       
+    };
+    //sau khi render
+    componentDidMount() {
+
         window.addEventListener('resize', this.updateDimensions);
-    
-      }
-      componentWillUnmount() {
+        window.addEventListener('scroll', this.handleScroll);
+        
+        
+    }
+    componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions);
-       
-      }
+        window.removeEventListener('scroll', this.handleScroll);
+
+    }
     render() {
-        let {checkTogget,width} = this.state
-        if(width > 1200){
+        let { checkTogget, width, activeNav } = this.state
+        if (width > 1200) {
             checkTogget = true
         }
         return (
@@ -55,27 +80,23 @@ export default class Nav extends Component {
                         <iconify-icon icon="ic:outline-menu" onClick={() => this.clickMenu()}  ></iconify-icon>
                     </div>
                     {
-                        
-                        checkTogget  && 
+
+                        checkTogget &&
                         <div className='main_nav'>
                             <ul>
                                 {
                                     this.state.listNav.map((item, index) => {
                                         return (
-                                            <li key={item.idNav} onClick={()=> this.handleClick(item.titleNav)}>
-                                                <NavLink to={item.titleNav} activeClassName="active" >{item.titleNav}</NavLink>
+                                            <li key={item.idNav} onClick={() => this.handleClick( item.titleNav)}>
+                                                <NavLink to={item.titleNav} className={activeNav === item.titleNav ? 'active' : ''} >{item.titleNav}</NavLink>
                                             </li>
                                         )
                                     })
                                 }
-
-
                             </ul>
                         </div>
                     }
-
                 </div>
-
             </div>
         )
     }

@@ -23,7 +23,7 @@ export default class Sotical extends Component {
             {
                 arrLogo.map((item) => {
                     return(
-                        <a href="#" class="info">
+                        <a href="/#" class="info">
                         <iconify-icon icon={item}></iconify-icon>
                     </a>
                     )

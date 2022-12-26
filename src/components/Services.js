@@ -58,7 +58,7 @@ export default class Services extends Component {
                         <h2 className="animate__animated wow animate__fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">WE
                             CREATE
                             <strong>AWESOME</strong> PROJECTS</h2>
-                        <a href="#" className="animate__animated wow animate__fadeInUp " data-wow-duration="1s"
+                        <a href="/#" className="animate__animated wow animate__fadeInUp " data-wow-duration="1s"
                             data-wow-delay="0.5s">GET STARTED</a>
                     </div>
                 </div>
