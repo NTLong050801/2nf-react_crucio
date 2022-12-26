@@ -9,14 +9,21 @@ import Portfolio from './components/Portfolio';
 import Blog  from './components/Blog';
 import Contact from './components/Contact';
 import Sotical from './components/Sotical';
+import { useEffect } from 'react';
+import WOW from 'wowjs';
 import {
   BrowserRouter,
-  Switch,
-  Route, Link
+
 } from 'react-router-dom'
+
 function App() {
+  // new WOW().init();
+  useEffect(() => {
+    new WOW.WOW().init();
+    }, []);
   return (
     <BrowserRouter>
+    
       <div className="App">
         <PreHeader />
         <Nav />
